@@ -1,0 +1,19 @@
+{{ $dateTime := .PublishDate.Format "01-02-2006" }}
+{{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
+<i class="far fa-calendar-alt"></i>
+<time datetime="{{ $dateTime }}">{{ .PublishDate.Format $dateFormat }}</time>
+{{ with .Params.categorias }}
+<i class="fas fa-folder"></i>
+{{ range . }}
+{{ $href := print (absURL "categorias/") (urlize .) }}
+<a class="btn btn-sm btn-outline-dark tag-btn" href="{{ $href }}">{{ . }}</a>
+{{ end }}
+{{ end }}
+
+{{ with .Params.ingredientes }}
+<i class="fas fa-shopping-cart"></i>
+{{ range . }}
+{{ $href_ing := print (absURL "ingredientes/") (urlize .) }}
+<a class="btn btn-sm btn-outline-dark tag-btn" href="{{ $href_ing }}">{{ . }}</a>
+{{ end }}
+{{ end }}

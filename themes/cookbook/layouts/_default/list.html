@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="section">
+    <span class="is-size-2 has-text-centered">{{ .Title }}</span>
+    <i class="fas fa-tags fa-2x pl-3 pb-3"></i>
+    <div class="columns is-multiline">
+        {{ $.Scratch.Set "category" .Title }}
+        {{ range .Data.Pages }}
+        <div class="column is-one-quarter">
+            {{ partial "summary.html" . }} {{/* pass in the element to the partial */}}
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+
+
