@@ -1,5 +1,6 @@
 
 {{ define "main" }}
+{{ $.Scratch.Set "taxonomyName" ( lower .Title )}}
 <div class="section">
     <div class="columns is-multiline">
         {{ range .Pages.ByTitle }}
@@ -12,37 +13,24 @@
                         <i class="fas fa-tags pl-3 pb-3"></i>
                     </p>
                     <div class="pt-4 pr-2">
-                        {{ $.Scratch.Set "categorias" .Title }}
-                        {{ range $name, $taxonomy := .Site.Taxonomies }}
-                            {{ range $key, $value := $taxonomy }}
-                                {{ if (eq $key ($.Scratch.Get "categorias")) }}
-                                    {{ $.Scratch.Set "count" (len $value) }}
-                                    {{ if (gt (len $value) 1 ) }}
-                                        {{ len $value }} Recetas Encontradas
+                        {{ $.Scratch.Set "categorias" ( replace (.Title | lower) " " "-" ) }}
+                                    {{ $.Scratch.Set "count" (len (index .Site.Taxonomies ( $.Scratch.Get "taxonomyName" ) ($.Scratch.Get "categorias") )) }}
+                                    {{ if (gt ($.Scratch.Get "count") 1 ) }}
+                                        {{ ($.Scratch.Get "count") }} Recetas Encontradas
                                     {{ else }}
                                         1 Receta Encontrada
                                     {{ end }}
-                                {{ end }}
-                            {{ end }}
-                        {{ end }}
                     </div>
                 </header>
                 <div class="card-content">
                     <div class="content">
-                        {{ $.Scratch.Set "categorias" .Title }}
-                        {{ range $name, $taxonomy := .Site.Taxonomies }}
-                            {{ range $key, $value := $taxonomy }}
-                                {{ if (eq $key ($.Scratch.Get "categorias")) }}
-                                    {{ range first 5 $value.Pages }}
+                        {{ $.Scratch.Set "categorias" ( replace (.Title | lower) " " "-" ) }}
+                            {{ range first 5 (sort ( index .Site.Taxonomies ( $.Scratch.Get "taxonomyName" ) ($.Scratch.Get "categorias") ) "LinkTitle" ) }}
                                         <li><a href="{{ .Permalink}}"> {{ .LinkTitle }}</a></li>
-                                    {{ end }}
-                                    {{ if (gt (len $value) 5) }}
+                            {{ end }}
+                                    {{ if (gt (len (index .Site.Taxonomies ( $.Scratch.Get "taxonomyName" ) ($.Scratch.Get "categorias"))) 5) }}
                                         <a href={{ $.Scratch.Get "relLink" }}>See All</a>
                                     {{ end }}
-                                   
-                                {{ end }}
-                            {{ end }}
-                        {{ end }}
                         <a class="summary" href="{{ .RelPermalink }}">
                             <p>{{ .Summary }}</p>
                         </a>

@@ -5,6 +5,7 @@ recipe_image: {{ .Site.Params.front.defaultImage | default "images/defaultImage.
 image_width: {{ .Site.Params.front.defaultImageWidth | default 512 }}
 image_height: {{ .Site.Params.front.defaultImageHeight | default 512 }}
 date: {{ .Date }}
+lastmod: {{ .Date }}
 servings: 4
 prep_time: 15 #in minutes #can be BLANK
 

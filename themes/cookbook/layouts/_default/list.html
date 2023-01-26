@@ -4,7 +4,7 @@
     <i class="fas fa-tags fa-2x pl-3 pb-3"></i>
     <div class="columns is-multiline">
         {{ $.Scratch.Set "category" .Title }}
-        {{ range .Data.Pages }}
+        {{ range sort .Data.Pages "Title" }}
         <div class="column is-one-quarter">
             {{ partial "summary.html" . }} {{/* pass in the element to the partial */}}
         </div>
