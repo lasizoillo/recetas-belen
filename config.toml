@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "http://recetas.lasi.ovh/"
 languageCode = "es-es"
 title = "Recetas de Belén"
 theme = "cookbook"
