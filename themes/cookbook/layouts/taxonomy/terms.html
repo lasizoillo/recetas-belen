@@ -15,11 +15,12 @@
                     <div class="pt-4 pr-2">
                         {{ $.Scratch.Set "categorias" ( replace (.Title | lower) " " "-" ) }}
                                     {{ $.Scratch.Set "count" (len (index .Site.Taxonomies ( $.Scratch.Get "taxonomyName" ) ($.Scratch.Get "categorias") )) }}
-                                    {{ if (gt ($.Scratch.Get "count") 1 ) }}
-                                        {{ ($.Scratch.Get "count") }} Recetas Encontradas
-                                    {{ else }}
-                                        1 Receta Encontrada
-                                    {{ end }}
+                        <span class="icon-text">
+                          <span class="icon">
+                            <i class="fas fa-search"></i>
+                          </span>
+                          <span class="tag is-info">{{ $.Scratch.Get "count" }}</span>
+                        </span>
                     </div>
                 </header>
                 <div class="card-content">
@@ -29,7 +30,7 @@
                                         <li><a href="{{ .Permalink}}"> {{ .LinkTitle }}</a></li>
                             {{ end }}
                                     {{ if (gt (len (index .Site.Taxonomies ( $.Scratch.Get "taxonomyName" ) ($.Scratch.Get "categorias"))) 5) }}
-                                        <a href={{ $.Scratch.Get "relLink" }}>See All</a>
+                                        <a href="{{ $.Scratch.Get "relLink" }}" class="button is-primary">See All</a>
                                     {{ end }}
                         <a class="summary" href="{{ .RelPermalink }}">
                             <p>{{ .Summary }}</p>

@@ -14,12 +14,12 @@
             <br>
             <i class="fas fa-folder pr-2"></i>
             {{ range $index, $element := $.Params.categorias }}
-            <a href="/categorias/{{ $element }}" class="tag is-black">{{$element}}</a>
+            <a href="/categorias/{{ $element | urlize }}" class="tag is-black">{{$element}}</a>
             {{ end }}
             <br>
             <i class="fas fa-shopping-cart pr-2"></i>
             {{ range $index, $element := $.Params.ingredientes }}
-            <a href="/ingredientes/{{ $element }}" class="tag is-black">{{$element}}</a>
+            <a href="/ingredientes/{{ $element | urlize }}" class="tag is-black">{{$element}}</a>
             {{ end }}
             <br>
             <i class="fas fa-calendar pr-4"></i>{{ .Date.Format "January 2006" }}
