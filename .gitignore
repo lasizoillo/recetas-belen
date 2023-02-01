@@ -9,3 +9,6 @@ public
 
 # KRecipes database to test import_krecipes.py script
 Krecipes.krecdb
+
+# Safe options injected with direnv
+.envrc
